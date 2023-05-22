@@ -20,14 +20,11 @@ type Config struct {
 			MaxAgeSeconds    int      `mapstructure:"MAX_AGE_SECONDS"`
 		}
 		File struct {
-			Dir         string `mapstructure:"DIR"`
-			BerkasSiswa string `mapstructure:"BERKAS_SISWA"`
+			Dir string `mapstructure:"DIR"`
 		}
-		Name          string `mapstructure:"NAME"`
-		Revision      string `mapstructure:"REVISION"`
-		URL           string `mapstructure:"URL"`
-		URLApiUpn     string `mapstructure:"URL_API_UPN"`
-		PasswordLogin string `mapstructure:"PASSWORD_LOGIN"`
+		Name     string `mapstructure:"NAME"`
+		Revision string `mapstructure:"REVISION"`
+		URL      string `mapstructure:"URL"`
 	}
 
 	Cache struct {
@@ -134,9 +131,6 @@ type Config struct {
 			AccessToken   string `mapstructure:"ACCESS_TOKEN"`
 			ExpiredInHour int    `mapstructure:"EXPIRED_IN_HOUR"`
 		} `mapstructure:"JWT"`
-		UPN struct {
-			AccessToken string `mapstructure:"ACCESS_TOKEN"`
-		} `mapstructure:"UPN"`
 	} `mapstructure:"TOKEN"`
 
 	Server struct {
