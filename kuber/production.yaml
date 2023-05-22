@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: silaturahmi-magang-be
+  namespace: be
+  annotations:
+    description: Ini Adalah Aplikasi Silaturahmi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: silaturahmi-magang-be
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      annotations:
+        description: Container WEB Silaturahmi
+      labels:
+        app: silaturahmi-magang-be
+    spec:
+      containers:
+      - image: 525245435/magang-be:v1
+        name: silaturahmi-magang-be
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+        # resources:
+        #     limits:
+        #       cpu: 6
+        #       memory: 6144M
+        #     requests:
+        #       cpu: 4
+        #       memory: 4096M
+        volumeMounts:
+        - mountPath: /app/.env
+          name: env-volume
+        - mountPath: /app/files/magang/
+          name: files-volume
+
+      volumes:
+      - name: env-volume
+        hostPath:
+          path: /home/gsi/Golang/src/gsi-sby/gitlab.com/upn-belajar-go/.env 
+      - name: files-volume
+        hostPath:
+          path: /home/gsi/Golang/src/gsi-sby/gitlab/files/magang/
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: silaturahmi-magang-be-svc
+  namespace: be
+  labels:
+    app: silaturahmi-magang-be
+  annotations:
+    description: Ini Adalah Service WEB Silaturahmi
+spec:
+  type: NodePort
+  ports:
+  - name: "8090"
+    port: 8090
+    # -- 31000 -32000
+    nodePort: 31100
+    targetPort: 8090
+  selector:
+    app: silaturahmi-magang-be
+status:
+  loadBalancer: {}
+
+# ---
+# apiVersion: autoscaling/v2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: silaturahmi-magang-be-hpa
+#   namespace: web
+# spec:
+#   minReplicas: 3
+#   maxReplicas: 16 #
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: silaturahmi-magang-be
+#   metrics:
+# #    - type: Resource
+# #      resource:
+# #        name: cpu
+# #        target:
+# #          type: Utilization
+# #          averageUtilization: 70
+#     - type: Resource
+#       resource:
+#         name: memory
+#         target:
+#           type: Utilization
+#           averageUtilization: 75

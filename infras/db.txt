@@ -1,0 +1,25 @@
+CREATE TABLE IF NOT EXISTS public.m_siswa
+(
+    id character varying(36) COLLATE pg_catalog."default" NOT NULL,
+    nama character varying(100) COLLATE pg_catalog."default",
+    kelas character varying(100) COLLATE pg_catalog."default",
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    created_by character varying(36) COLLATE pg_catalog."default",
+    updated_by character varying(36) COLLATE pg_catalog."default",
+    is_deleted boolean DEFAULT false,
+    CONSTRAINT m_siswa_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.m_siswa
+(
+    id character varying(36) COLLATE pg_catalog."default" NOT NULL,
+    nama character varying(100) COLLATE pg_catalog."default",
+    kelas character varying(100) COLLATE pg_catalog."default",
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    created_by character varying(36) COLLATE pg_catalog."default",
+    updated_by character varying(36) COLLATE pg_catalog."default",
+    is_deleted boolean DEFAULT false,
+    CONSTRAINT m_siswa_pkey PRIMARY KEY (id)
+)

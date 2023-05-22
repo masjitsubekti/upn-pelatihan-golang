@@ -1,0 +1,67 @@
+# Ignore files folder
+
+files/item/*
+files/kategori_item/*
+files/log-book-magang/*
+files/luaran-magang/*
+files/nilai_magang/*
+files/bukti-penerimaan-magang/*
+
+
+
+# Ignore vendor, binary executable, and env file
+
+vendor/
+
+engine
+
+.env
+
+
+
+# Ignore VS Code stuff
+
+.vscode/*
+
+!.vscode/launch.json
+
+.DS_Store
+
+
+
+# Ignore automatically generated Swagger docs
+
+/docs/*
+/docs*
+docs/*
+
+
+
+# Ignore Air (live reload) stuff
+
+.air.toml
+
+tmp/*
+tmp*
+tmp/
+
+# Ignore other binaries
+
+bin/
+
+
+
+# Ignore generated wiring file
+
+wire_gen.go
+
+
+
+# Ignore mock and test files
+
+# *mock.go
+
+**/mock*
+
+.cover
+
