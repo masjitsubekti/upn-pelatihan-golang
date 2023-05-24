@@ -9,7 +9,9 @@ import (
 
 // DomainHandlers is a struct that contains all domain-specific handlers.
 type DomainHandlers struct {
-	MahasiswaHandler handlers.MahasiswaHandler
+	JenisMbkmHandler            handlers.JenisMbkmHandler
+	MataKuliahHandler           handlers.MataKuliahHandler
+	PendaftarProgramMbkmHandler handlers.PendaftarProgramMbkmHandler
 }
 
 // Router is the router struct containing handlers.
@@ -29,6 +31,8 @@ func ProvideRouter(domainHandlers DomainHandlers, jwtMiddleware *middleware.JWT)
 // SetupRoutes sets up all routing for this server.
 func (r *Router) SetupRoutes(mux *chi.Mux) {
 	mux.Route("/v1", func(rc chi.Router) {
-		r.DomainHandlers.MahasiswaHandler.Router(rc, r.JwtMiddleware)
+		r.DomainHandlers.JenisMbkmHandler.Router(rc, r.JwtMiddleware)
+		r.DomainHandlers.MataKuliahHandler.Router(rc, r.JwtMiddleware)
+		r.DomainHandlers.PendaftarProgramMbkmHandler.Router(rc, r.JwtMiddleware)
 	})
 }

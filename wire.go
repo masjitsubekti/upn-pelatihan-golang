@@ -26,12 +26,26 @@ var persistences = wire.NewSet(
 
 // Wiring for domain Master
 var domainMaster = wire.NewSet(
-	// MahasiswaService interface and implementation
-	master.ProvideMahasiswaServiceImpl,
-	wire.Bind(new(master.MahasiswaService), new(*master.MahasiswaServiceImpl)),
-	// MahasiswaRepository interface and implementation
-	master.ProvideMahasiswaRepositoryPostgreSQL,
-	wire.Bind(new(master.MahasiswaRepository), new(*master.MahasiswaRepositoryPostgreSQL)),
+	// JenisMbkmService interface and implementation
+	master.ProvideJenisMbkmServiceImpl,
+	wire.Bind(new(master.JenisMbkmService), new(*master.JenisMbkmServiceImpl)),
+	// JenisMbkmRepository interface and implementation
+	master.ProvideJenisMbkmRepositoryPostgreSQL,
+	wire.Bind(new(master.JenisMbkmRepository), new(*master.JenisMbkmRepositoryPostgreSQL)),
+
+	// MataKuliahService interface and implementation
+	master.ProvideMataKuliahServiceImpl,
+	wire.Bind(new(master.MataKuliahService), new(*master.MataKuliahServiceImpl)),
+	// MataKuliahRepository interface and implementation
+	master.ProvideMataKuliahRepositoryPostgreSQL,
+	wire.Bind(new(master.MataKuliahRepository), new(*master.MataKuliahRepositoryPostgreSQL)),
+
+	// PendaftarProgramMbkmService interface and implementation
+	master.ProvidePendaftarProgramMbkmServiceImpl,
+	wire.Bind(new(master.PendaftarProgramMbkmService), new(*master.PendaftarProgramMbkmServiceImpl)),
+	// PendaftarProgramMbkmRepository interface and implementation
+	master.ProvidePendaftarProgramMbkmRepositoryPostgreSQL,
+	wire.Bind(new(master.PendaftarProgramMbkmRepository), new(*master.PendaftarProgramMbkmRepositoryPostgreSQL)),
 )
 
 // Wiring for all domains.
@@ -42,7 +56,9 @@ var domains = wire.NewSet(
 // Wiring for HTTP routing.
 var routing = wire.NewSet(
 	wire.Struct(new(router.DomainHandlers), "*"),
-	handlers.ProvideMahasiswaHandler,
+	handlers.ProvideJenisMbkmHandler,
+	handlers.ProvideMataKuliahHandler,
+	handlers.ProvidePendaftarProgramMbkmHandler,
 	// jwt
 	middleware.ProvideJWTMiddleware,
 	router.ProvideRouter,
